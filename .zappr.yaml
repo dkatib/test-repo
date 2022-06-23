@@ -1,0 +1,33 @@
+approvals:
+  # PR needs at least 2 approvals
+  minimum: 3
+  # approval = comment that matches this regex
+  pattern: "^(:\\+1:|aprobado)$"
+  veto:
+    # veto/blocking a PR = comment that matches this regex
+    pattern: "^(:\\-1:|desaprobado)$"
+  # note that `from` is by default empty,
+  # accepting any matching comment as approval
+  from:
+    # commenter must be either one of:
+    orgs:
+      # a public zalando org member
+      # (any org in here counts)
+      - aprobadores
+    # OR a collaborator of the repo
+    collaborators: true
+    # OR one of these guys
+    users:
+      - dkatib
+  # you can define groups from which you
+  # require approvals
+  groups:
+    # this defines a "zalando" approver group
+    aprobadores:
+      # where the approval check will fail if there
+      # is less than 1 approval from it
+      minimum: 1
+      # the group includes every public zalando org member
+      from:
+        orgs:
+          - aprobadores
